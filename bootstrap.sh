@@ -2,7 +2,8 @@
 
 cp /etc/logstash-forwarder.template /etc/logstash-forwarder
 
-service logstash-forwarder start
+service collectd start
+nohup /opt/logstash-forwarder/bin/logstash-forwarder -config /etc/logstash-forwarder -spool-size 100 > /var/log/start-logstash-forwarder.log &
 
 
 if [[ $1 == "-d" ]]; then
