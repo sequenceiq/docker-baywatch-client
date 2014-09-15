@@ -1,24 +1,37 @@
 FROM ubuntu:14.04
 MAINTAINER SequenceIQ
 
+# Logstash 1.4.2
+
+RUN apt-get update && apt-get install -y software-properties-common wget stress
+
+#Install Java 7
+RUN add-apt-repository ppa:webupd8team/java -y
 RUN apt-get update
-#RUN apt-get upgrade 
-RUN apt-get install -y wget stress telnet
-RUN wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
-RUN echo 'deb http://packages.elasticsearch.org/logstashforwarder/debian stable main' | tee /etc/apt/sources.list.d/logstashforwarder.list
-RUN apt-get update && apt-get install -y logstash-forwarder
-
-#Insecure cert
-RUN mkdir -p /etc/pki
-ADD logstash-forwarder/tls /etc/pki/tls
-RUN chmod -R 600 /etc/pki
-
-#Config
-ADD logstash-forwarder/logstash-forwarder.template /etc/logstash-forwarder.template
+RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+RUN apt-get install -y oracle-java7-installer
 
 #Install collectd
 RUN apt-get install -y collectd collectd-utils
 ADD collectd/collectd.conf /etc/collectd/collectd.conf
+
+#Install keys
+RUN wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
+RUN echo 'deb http://packages.elasticsearch.org/logstash/1.4/debian stable main' | sudo tee /etc/apt/sources.list.d/logstash.list
+RUN apt-get update && apt-get install -y logstash=1.4.2-1-2c0f5a1
+
+#Workaround regarding ulimit privileges
+RUN sed -i.bak '/set ulimit as/,+2 s/^/#/' /etc/init.d/logstash
+#RUN sed -i.bak 's/args=\"/args=\"-verbose /' /etc/init.d/logstash
+RUN sed -i.bak 's/LS_USER=logstash/LS_USER=root/' /etc/init.d/logstash
+
+
+#Configure Logstash INPUT and FILTER
+ADD logstash/shipper/shipper-nginx_access.conf /etc/logstash/conf.d/shipper-nginx_access.conf
+ADD logstash/shipper/shipper-collectd.conf /etc/logstash/conf.d/shipper-collectd.conf
+
+#Configure Logstash OUTPUT
+ADD logstash/outputs/output.conf /etc/logstash/conf.d/output.conf
 
 #Bootstrap file
 ADD bootstrap.sh /etc/bootstrap.sh
