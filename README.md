@@ -4,7 +4,7 @@ This image aims to provide monitoring functionality for Hadoop Clusters.
 
 ##Build
 ```
-docker build --rm -t elk_ubu_client .
+docker build -t elk_ubu_client .
 ```
 
 ##Run
