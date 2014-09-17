@@ -29,6 +29,7 @@ RUN sed -i.bak 's/LS_USER=logstash/LS_USER=root/' /etc/init.d/logstash
 #Configure Logstash INPUT and FILTER
 ADD logstash/shipper/shipper-nginx_access.conf /etc/logstash/conf.d/shipper-nginx_access.conf
 ADD logstash/shipper/shipper-collectd.conf /etc/logstash/conf.d/shipper-collectd.conf
+ADD logstash/shipper/shipper-metrics.conf /etc/logstash/conf.d/shipper-metrics.conf
 
 #Configure Logstash OUTPUT
 ADD logstash/outputs/output.conf /etc/logstash/conf.d/output.conf
