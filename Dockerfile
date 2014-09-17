@@ -31,6 +31,10 @@ RUN sed -i.bak 's/LS_USER=logstash/LS_USER=root/' /etc/init.d/logstash
 #ADD logstash/shipper/shipper-collectd.conf /etc/logstash/conf.d/shipper-collectd.conf
 ADD logstash/shipper/shipper-metrics.conf /etc/logstash/conf.d/shipper-metrics.conf
 
+#Configure Logstash PATTERN
+RUN mkdir /etc/logstash/conf.d/patterns
+ADD logstash/pattern/metrics /etc/logstash/conf.d/patterns/metrics
+
 #Configure Logstash OUTPUT
 ADD logstash/outputs/output.conf /etc/logstash/conf.d/output.conf
 
