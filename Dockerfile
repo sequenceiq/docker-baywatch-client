@@ -35,7 +35,7 @@ ADD logstash/shipper/shipper-metrics.conf /etc/logstash/conf.d/shipper-metrics.c
 ADD logstash/outputs/output.conf /etc/logstash/conf.d/output.conf
 
 #Configure Logstash OUTPUT
-ADD sample /sample
+
 
 
 #Bootstrap file
