@@ -29,13 +29,13 @@ RUN sed -i.bak 's/LS_USER=logstash/LS_USER=root/' /etc/init.d/logstash
 #Configure Logstash INPUT and FILTER
 #ADD logstash/shipper/shipper-nginx_access.conf /etc/logstash/conf.d/shipper-nginx_access.conf
 #ADD logstash/shipper/shipper-collectd.conf /etc/logstash/conf.d/shipper-collectd.conf
-ADD logstash/shipper/shipper-hadoop-metrics-rpc.conf /etc/logstash/conf.d/shipper-rpc.conf
 ADD logstash/shipper/shipper-hadoop-metrics-clustermetrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-clustermetrics.conf
-ADD logstash/shipper/shipper-hadoop-metrics-jvmmetrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-jvmmetrics.conf
-ADD logstash/shipper/shipper-hadoop-metrics-queuemetrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-queuemetrics.conf
-ADD logstash/shipper/shipper-hadoop-metrics-rcpdetailed.conf /etc/logstash/conf.d/shipper-hadoop-metrics-rcpdetailed.conf
-ADD logstash/shipper/shipper-hadoop-metrics-systemmetrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-systemmetrics.conf
-ADD logstash/shipper/shipper-hadoop-metrics-ugimetrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-ugimetrics.conf
+#ADD logstash/shipper/shipper-hadoop-metrics-jvmmetrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-jvmmetrics.conf
+#ADD logstash/shipper/shipper-hadoop-metrics-queuemetrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-queuemetrics.conf
+#ADD logstash/shipper/shipper-hadoop-metrics-rcpdetailed.conf /etc/logstash/conf.d/shipper-hadoop-metrics-rcpdetailed.conf
+#ADD logstash/shipper/shipper-hadoop-metrics-systemmetrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-systemmetrics.conf
+#ADD logstash/shipper/shipper-hadoop-metrics-ugimetrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-ugimetrics.conf
+#ADD logstash/shipper/shipper-hadoop-metrics-rpc.conf /etc/logstash/conf.d/shipper-rpc.conf
 
 #Configure Logstash PATTERN
 RUN mkdir /etc/logstash/conf.d/patterns
