@@ -31,7 +31,14 @@ RUN sed -i.bak 's/LS_USER=logstash/LS_USER=root/' /etc/init.d/logstash
 #Configure Logstash INPUT and FILTER
 #ADD logstash/shipper/shipper-nginx_access.conf /etc/logstash/conf.d/shipper-nginx_access.conf
 ADD logstash/shipper/shipper-collectd.conf /etc/logstash/conf.d/shipper-collectd.conf
-ADD logstash/shipper/shipper-hadoop-metrics-resourcemanager.conf /etc/logstash/conf.d/shipper-hadoop-metrics-resourcemanager.conf
+ADD	logstash/shipper/shipper-hadoop-metrics-datanode-metrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-datanode-metrics.conf
+ADD	logstash/shipper/shipper-hadoop-metrics-maptask-metrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-maptask-metrics.conf
+ADD	logstash/shipper/shipper-hadoop-metrics-mrappmaster-metrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-mrappmaster-metrics.conf
+ADD	logstash/shipper/shipper-hadoop-metrics-namenode-metrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-namenode-metrics.conf
+ADD	logstash/shipper/shipper-hadoop-metrics-nodemanager-metrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-nodemanager-metrics.conf
+ADD logstash/shipper/shipper-hadoop-metrics-reducetask-metrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-reducetask-metrics.conf
+ADD	logstash/shipper/shipper-hadoop-metrics-resourcemanager-metrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-resourcemanager-metrics.conf
+ADD	logstash/shipper/shipper-hadoop-metrics-secondarynamenode-metrics.conf /etc/logstash/conf.d/shipper-hadoop-metrics-secondarynamenode-metrics.conf
 
 #Configure Logstash PATTERN
 RUN mkdir /etc/logstash/conf.d/patterns

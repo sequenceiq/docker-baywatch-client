@@ -16,5 +16,3 @@ if [[ $1 == "-bash" ]]; then
   /bin/bash
 fi
 
-
-CMD ["/etc/bootstrap.sh", "-d"]
