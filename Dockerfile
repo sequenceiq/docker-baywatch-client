@@ -15,8 +15,10 @@ RUN apt-get install -y oracle-java7-installer
 RUN apt-get install -y collectd collectd-utils
 ADD collectd/collectd.conf /etc/collectd/collectd.conf
 
-#Install keys
+#Install repo keys
 RUN wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
+
+#Install Logstash
 RUN echo 'deb http://packages.elasticsearch.org/logstash/1.4/debian stable main' | sudo tee /etc/apt/sources.list.d/logstash.list
 RUN apt-get update && apt-get install -y logstash=1.4.2-1-2c0f5a1
 
