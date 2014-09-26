@@ -9,8 +9,9 @@ docker build -t elk_ubu_client .
 
 ##Run
 ```
-SRV1=$(docker inspect elk_ubu | grep "vfs/dir" | awk '/"(.*)"/ { gsub(/"/,"",$2); print $2 }') && echo $SRV1
-docker run -i -t -v $SRV1:/elk_ubu/log  elk_ubu_client /etc/bootstrap.sh -bash
+docker run -d -p 8080:8080 -h amb0.mycorp.kom --name ambari-singlenode sequenceiq/ambari:1.7.0-ea --tag ambari-server=true
+docker run -e BLUEPRINT=single-node-hdfs-yarn --link ambari-singlenode:ambariserver -t --rm --entrypoint /bin/sh sequenceiq/ambari:1.7.0-ea -c /tmp/install-cluster.sh
 
-#docker run -i -t  elk_ubu_client /etc/bootstrap.sh -bash
+SRV1=$(docker inspect --format='{{index .Volumes "/var/log"}}' ambari-singlenode) && echo $SRV1
+docker run -i -t -v $SRV1:/amb/log  elk_ubu_client /etc/bootstrap.sh -bash
 ```
