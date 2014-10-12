@@ -2,9 +2,9 @@
 
 This image aims to provide monitoring functionality for Hadoop Clusters.
 
-##Build
+##Pull the container
 ```
-docker build -t elk_ubu_client .
+docker pull sequenceiq/elk-client
 ```
 
 ##Run
