@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ ! -z $BAYWATCH_IP ]; then
+	sed -i -E "s/cluster => 'logstash-es'/host => \"$BAYWATCH_IP\"/g" /etc/logstash/conf.d/output.conf
+fi
+
 service collectd start
 service logstash start
 
