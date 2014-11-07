@@ -52,4 +52,6 @@ ADD logstash/outputs/output.conf /etc/logstash/conf.d/output.conf
 ADD bootstrap.sh /etc/bootstrap.sh
 RUN chown root:root /etc/bootstrap.sh && chmod 700 /etc/bootstrap.sh
 
-ENV BOOTSTRAP /etc/bootstrap.sh
+ENTRYPOINT ["/etc/bootstrap.sh"]
+
+CMD ["-d"]
