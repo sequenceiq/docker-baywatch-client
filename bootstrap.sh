@@ -1,20 +1,17 @@
 #!/bin/bash
+: ${BAYWATCH_IP:?"Please set the BAYWATCH_IP environment variable!"}
+: ${BAYWATCH_CLUSTER_NAME:?"Please set the BAYWATCH_CLUSTER_NAME environment variable!"}
+: ${BAYWATCH_CLIENT_HOSTNAME:?"Please set the BAYWATCH_HOSTNAME environment variable!"}
+: ${BAYWATCH_CLIENT_PRIVATE_IP:?"Please set the BAYWATCH_PRIVATE_IP environment variable!"}
+: ${BAYWATCH_CLIENT_PUBLIC_IP:?"Please set the BAYWATCH_PUBLIC_IP environment variable!"}
 
-if [ ! -z $BAYWATCH_IP ]
-then
-	sed -i -E "s/cluster => 'logstash-es'/host => \"$BAYWATCH_IP\"/g" /etc/logstash/conf.d/output.conf
-elif [ ! -z $BAYWATCH_CLUSTER_NAME ] 
-then
-	sed -i -E "s/cluster => 'logstash-es'/cluster => \'$BAYWATCH_CLUSTER_NAME\'/g" /etc/logstash/conf.d/output.conf
-fi
+sed -i -E "s/host => 'es-host'/host => \"$BAYWATCH_IP\"/g" /etc/logstash/conf.d/output.conf
+sed -i -E "s/cluster => 'logstash-es'/cluster => \'$BAYWATCH_CLUSTER_NAME\'/g" /etc/logstash/conf.d/output.conf
+sed -i -E "s/'client_hostname'/\'$BAYWATCH_CLIENT_HOSTNAME\'/g" /etc/logstash/conf.d/shipper-common.conf
+sed -i -E "s/'client_private_ip'/\'$BAYWATCH_CLIENT_PRIVATE_IP\'/g" /etc/logstash/conf.d/shipper-common.conf
+sed -i -E "s/'client_public_ip'/\'$BAYWATCH_CLIENT_PUBLIC_IP\'/g" /etc/logstash/conf.d/shipper-common.conf
 
-service collectd start
 service logstash start
-
-#/opt/logstash/bin/logstash agent -f /etc/logstash/conf.d/ --configtest
-#nohup /opt/logstash/bin/logstash agent -f /etc/logstash/conf.d/ > /var/log/logstash/logstash.stdout &
-
-
 
 if [[ $1 == "-d" ]]; then
   while true; do sleep 1000; done
@@ -23,4 +20,3 @@ fi
 if [[ $1 == "-bash" ]]; then
   /bin/bash
 fi
-
