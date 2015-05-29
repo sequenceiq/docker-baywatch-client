@@ -17,7 +17,6 @@ RUN sed -i.bak 's/LS_USER=logstash/LS_USER=root/' /etc/init.d/logstash
 
 #Configure Logstash INPUT and FILTER
 ADD	logstash/shipper/shipper-common.conf /etc/logstash/conf.d/shipper-common.conf
-ADD	logstash/shipper/shipper-consul.conf /etc/logstash/conf.d/shipper-consul.conf
 ADD	logstash/shipper/shipper-consul-watch.conf /etc/logstash/conf.d/shipper-consul-watch.conf
 ADD	logstash/shipper/shipper-ambari-server.conf /etc/logstash/conf.d/shipper-ambari-server.conf
 ADD	logstash/shipper/shipper-ambari-agent.conf /etc/logstash/conf.d/shipper-ambari-agent.conf
