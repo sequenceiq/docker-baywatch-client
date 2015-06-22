@@ -3,13 +3,11 @@
 : ${BAYWATCH_CLUSTER_NAME:?"Please set the BAYWATCH_CLUSTER_NAME environment variable!"}
 : ${BAYWATCH_CLIENT_HOSTNAME:?"Please set the BAYWATCH_HOSTNAME environment variable!"}
 : ${BAYWATCH_CLIENT_PRIVATE_IP:?"Please set the BAYWATCH_PRIVATE_IP environment variable!"}
-: ${BAYWATCH_CLIENT_PUBLIC_IP:?"Please set the BAYWATCH_PUBLIC_IP environment variable!"}
 
 sed -i -E "s/host => 'es-host'/host => \"$BAYWATCH_IP\"/g" /etc/logstash/conf.d/output.conf
 sed -i -E "s/cluster => 'logstash-es'/cluster => \'$BAYWATCH_CLUSTER_NAME\'/g" /etc/logstash/conf.d/output.conf
 sed -i -E "s/'client_hostname'/\'$BAYWATCH_CLIENT_HOSTNAME\'/g" /etc/logstash/conf.d/shipper-common.conf
 sed -i -E "s/'client_private_ip'/\'$BAYWATCH_CLIENT_PRIVATE_IP\'/g" /etc/logstash/conf.d/shipper-common.conf
-sed -i -E "s/'client_public_ip'/\'$BAYWATCH_CLIENT_PUBLIC_IP\'/g" /etc/logstash/conf.d/shipper-common.conf
 
 service logstash start
 
