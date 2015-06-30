@@ -1,4 +1,4 @@
-FROM java:7
+FROM java:openjdk-7u79-jre
 MAINTAINER SequenceIQ
 
 # Logstash 1.4.2
