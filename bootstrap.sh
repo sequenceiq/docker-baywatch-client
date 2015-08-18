@@ -1,7 +1,7 @@
 #!/bin/bash
 : ${BAYWATCH_IP:?"Please set the BAYWATCH_IP environment variable!"}
 : ${BAYWATCH_CLUSTER_NAME:?"Please set the BAYWATCH_CLUSTER_NAME environment variable!"}
-: ${BAYWATCH_CLIENT_HOSTNAME:?"Please set the BAYWATCH_HOSTNAME environment variable!"}
+: ${BAYWATCH_CLIENT_HOSTNAME:?"Please set the BAYWATCH_CLIENT_HOSTNAME environment variable!"}
 : ${BAYWATCH_CLIENT_PRIVATE_IP:?"Please set the BAYWATCH_PRIVATE_IP environment variable!"}
 
 sed -i -E "s/host => 'es-host'/host => \"$BAYWATCH_IP\"/g" /etc/logstash/conf.d/output.conf

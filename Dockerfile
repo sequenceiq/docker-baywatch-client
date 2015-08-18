@@ -21,6 +21,7 @@ ADD	logstash/shipper/shipper-consul.conf /etc/logstash/conf.d/shipper-consul.con
 ADD	logstash/shipper/shipper-consul-watch.conf /etc/logstash/conf.d/shipper-consul-watch.conf
 ADD	logstash/shipper/shipper-ambari-server.conf /etc/logstash/conf.d/shipper-ambari-server.conf
 ADD	logstash/shipper/shipper-ambari-agent.conf /etc/logstash/conf.d/shipper-ambari-agent.conf
+ADD	logstash/shipper/shipper-kerberos-kdc.conf /etc/logstash/conf.d/shipper-kerberos-kdc.conf
 
 #Create sincedb directory
 RUN mkdir /sincedb
